@@ -1,0 +1,32 @@
+﻿@using SistemaLogs.Modelos
+
+@{
+    ViewData["Title"] = "Alertas de mantenimiento";
+    @model List<AlertaPredictiva>;
+}
+
+<h1>Alertas de mantenimiento Preventivo</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Placa del Camión</th>
+            <th>Mensaje</th>
+            <th>Fecha Generación</th>
+            <th>Tipo de Alerta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alerta in Model)
+        {
+            <tr>
+                <td>@alerta.Codigo</td>
+                <td>@alerta.CamionCodigo</td>
+                <td>@alerta.Mensaje</td>
+                <td>@alerta.FechaGeneracion.ToString("g")</td>
+                <td>@alerta.TipoAlerta</td>
+            </tr>
+        }
+    </tbody>
+</table>
