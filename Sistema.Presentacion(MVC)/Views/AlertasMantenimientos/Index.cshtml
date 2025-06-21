@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Alertas de Mantenimiento";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Alertas de Mantenimiento</h1>
+    <h4 class="text-center text-secondary">Lista de todas las alertas generadas para mantenimiento</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Tipo de Mantenimiento</th>
+                    <th>Descripción</th>
+                    <th>Fecha Generación</th>
+                    <th>Resuelta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var alerta in Model)
+                {
+                    <tr>
+                        <td>@alerta.Codigo</td>
+                        <td>@alerta.TipoMantenimiento</td>
+                        <td>@alerta.Descripcion</td>
+                        <td>@alerta.FechaGeneracion.ToString("dd/MM/yyyy")</td>
+                        <td>@(alerta.Resuelta ? "Sí" : "No")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

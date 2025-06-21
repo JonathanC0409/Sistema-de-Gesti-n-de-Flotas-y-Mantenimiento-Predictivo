@@ -1,42 +1,69 @@
 ﻿@model SistemaGFYMP.Modelos.Taller
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Taller";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Taller</h4>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Detalles del Taller</h1>
+    <h4 class="text-center text-secondary">Información completa del taller seleccionado</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Codigo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ciudad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ciudad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CapacidadMaximaReparaciones)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CapacidadMaximaReparaciones)
-        </dd>
-    </dl>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-center text-primary">Detalles del Taller</h4>
+            <dl class="row">
+                <dt class="col-sm-4">Código</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Codigo)</dd>
+
+                <dt class="col-sm-4">Nombre</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4">Ciudad</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Ciudad)</dd>
+
+                <dt class="col-sm-4">Reparaciones Máximas</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.CapacidadMaximaReparaciones)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="table-responsive">
+        <h4 class="text-center text-primary">Mantenimientos Programados</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo de Mantenimiento</th>
+                    <th>Camión</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mantenimiento in Model.MantenimientosProgramados)
+                {
+                    <tr>
+                        <td>@mantenimiento.Fecha.ToShortDateString()</td>
+                        <td>@mantenimiento.TipoMantenimiento</td>
+                        <td>@mantenimiento.Camion.Marca</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Codigo }, new { @class = "btn btn-warning" })
+            |
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Codigo  }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

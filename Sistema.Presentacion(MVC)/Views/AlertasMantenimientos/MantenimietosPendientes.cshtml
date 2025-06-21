@@ -1,0 +1,78 @@
+﻿@model List<SistemaLogs.Modelos.AlertaMantenimiento>
+
+@{
+    ViewData["Title"] = "Mantenimientos Pendientes";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">@ViewData["Title"]</h1>
+    <h4 class="text-center text-secondary">Lista de mantenimientos pendientes para los camiones</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Camión Código</th>
+                    <th>Tipo de Mantenimiento</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Generación</th>
+                    <th>Resuelto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mantenimiento in Model)
+                {
+                    <tr>
+                        <td>@mantenimiento.CamionCodigo</td>
+                        <td>@mantenimiento.TipoMantenimiento</td>
+                        <td>@mantenimiento.Descripcion</td>
+                        <td>@mantenimiento.FechaGeneracion.ToString("dd/MM/yyyy")</td>
+                        <td>@(mantenimiento.Resuelta ? "Sí" : "No")</td>
+                        <td>
+                            @if (!mantenimiento.Resuelta)
+                            {
+                                <!-- Botón para atender la alerta -->
+                                <button class="btn btn-success btn-sm" onclick="atenderAlerta(@mantenimiento.Codigo)">Atender</button>
+
+                            }
+                            else
+                            {
+                                <span class="text-success">Atendido</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Script para llamar a la API y actualizar el estado de la alerta -->
+@section Scripts {
+    <script>
+        function atenderAlerta(id) {
+            // Hacer una solicitud PUT a la API
+            fetch(`https://localhost:7220/api/AlertasMantenimientos/Atender/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Recargar la página para reflejar el cambio
+                    location.reload();
+                } else {
+                    // Mostrar el mensaje de error si la respuesta no es exitosa
+                    response.text().then(text => alert("Error al atender la alerta: " + text));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error al realizar la solicitud");
+            });
+        }
+    </script>
+}

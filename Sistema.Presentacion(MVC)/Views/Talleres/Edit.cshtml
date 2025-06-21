@@ -1,48 +1,57 @@
 ﻿@model SistemaGFYMP.Modelos.Taller
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Taller";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Editar Taller</h1>
+    <h4 class="text-center text-secondary">Formulario para editar un taller existente</h4>
+    <hr />
 
-<h4>Taller</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input asp-for="Ciudad" class="form-control" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CapacidadMaximaReparaciones" class="control-label"></label>
-                <input asp-for="CapacidadMaximaReparaciones" class="form-control" />
-                <span asp-validation-for="CapacidadMaximaReparaciones" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 rounded shadow-sm">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Codigo" class="form-label">Código</label>
+                    <input asp-for="Codigo" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Nombre" class="form-label">Nombre del Taller</label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre del taller" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Ciudad" class="form-label">Ciudad</label>
+                    <input asp-for="Ciudad" class="form-control" placeholder="Ingrese la ciudad del taller" />
+                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="CapacidadMaximaReparaciones" class="form-label">Reparaciones Máximas</label>
+                    <input asp-for="CapacidadMaximaReparaciones" class="form-control" placeholder="Ingrese la capacidad máxima de reparaciones" />
+                    <span asp-validation-for="CapacidadMaximaReparaciones" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mb-3">
+                    <input type="submit" value="Guardar" class="btn btn-success w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

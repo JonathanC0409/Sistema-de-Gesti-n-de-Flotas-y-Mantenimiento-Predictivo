@@ -20,6 +20,7 @@ namespace SistemaGFYMP.Api.Controllers
             _context = context;
         }
 
+        
         // GET: api/Conductores
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Conductor>>> GetConductor()

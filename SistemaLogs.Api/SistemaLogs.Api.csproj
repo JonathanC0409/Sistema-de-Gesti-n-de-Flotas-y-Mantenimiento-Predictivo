@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SistemaGFYMP.Api\SistemaGFYMP.Api.csproj" />
     <ProjectReference Include="..\SistemaLogs.Modelos\SistemaLogs.Modelos.csproj" />
   </ItemGroup>
 

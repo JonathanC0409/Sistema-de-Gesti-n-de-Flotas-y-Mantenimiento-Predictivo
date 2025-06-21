@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sistema.API.Consume;
 using SistemaLogs.Modelos;
 
 namespace Sistema.Presentacion_MVC_.Controllers
 {
-    public class LogsSensoresController : Controller
+    public class LogsAuditoriasController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
-            var datos = CRUD<LogSensor>.GetAll();
+            var datos = CRUD<LogAuditoria>.GetAll();
             return View(datos);
         }
     }

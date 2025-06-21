@@ -39,6 +39,10 @@ namespace SistemaGFYMP.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EstadoMotor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Kilometraje")
                         .HasColumnType("int");
 
@@ -49,6 +53,12 @@ namespace SistemaGFYMP.Api.Migrations
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("NivelAceite")
+                        .HasColumnType("float");
+
+                    b.Property<double>("NivelGasolina")
+                        .HasColumnType("float");
 
                     b.Property<string>("Placa")
                         .IsRequired()

@@ -1,59 +1,47 @@
 ﻿@model IEnumerable<SistemaGFYMP.Modelos.MantenimientoProgramado>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Mantenimientos Programados";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Mantenimientos Programados</h1>
+    <h4 class="text-center text-secondary">Lista de todos los mantenimientos programados</h4>
+    <hr />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoMantenimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TallerCodigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CamionCodigo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoMantenimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TallerCodigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CamionCodigo)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Codigo}) |
-                @Html.ActionLink("Details", "Details", new { id=item.Codigo }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Codigo  })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-center mb-3">
+        <a asp-action="Create" class="btn btn-success">Crear Nuevo Mantenimiento</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.TipoMantenimiento)</th>
+                    <th>Taller</th>
+                    <th>Camión</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TipoMantenimiento)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Taller.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Camion.Marca)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Codigo }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Codigo }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Codigo })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

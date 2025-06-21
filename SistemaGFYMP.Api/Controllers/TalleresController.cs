@@ -20,18 +20,26 @@ namespace SistemaGFYMP.Api.Controllers
             _context = context;
         }
 
+
         // GET: api/Talleres
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Taller>>> GetTaller()
         {
-            return await _context.Talleres.ToListAsync();
+            var data = await _context.Talleres
+                .Include(t => t.MantenimientosProgramados)
+                .ToListAsync();
+            return data;
         }
 
         // GET: api/Talleres/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Taller>> GetTaller(int id)
         {
-            var taller = await _context.Talleres.FindAsync(id);
+            var taller = await _context.Talleres
+                .Where(t => t.Codigo == id)
+                .Include(t => t.MantenimientosProgramados)
+                .ThenInclude(m => m.Camion)
+                .FirstAsync();
 
             if (taller == null)
             {

@@ -21,7 +21,7 @@ namespace SistemaLogs.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SistemaLogs.Modelos.AlertaPredictiva", b =>
+            modelBuilder.Entity("SistemaLogs.Modelos.AlertaMantenimiento", b =>
                 {
                     b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
@@ -32,23 +32,29 @@ namespace SistemaLogs.Api.Migrations
                     b.Property<int>("CamionCodigo")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("FechaGeneracion")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Mensaje")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("TipoAlerta")
+                    b.Property<DateTime>("FechaGeneracion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("FechaResolucion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Resuelta")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("TipoMantenimiento")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("AlertasPredictivas");
+                    b.ToTable("AlertasMantenimientos");
                 });
 
-            modelBuilder.Entity("SistemaLogs.Modelos.LogSensor", b =>
+            modelBuilder.Entity("SistemaLogs.Modelos.LecturaSensor", b =>
                 {
                     b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
@@ -58,20 +64,65 @@ namespace SistemaLogs.Api.Migrations
 
                     b.Property<int>("CamionCodigo")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Comentarios")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("EstadoMotor")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("FechaLectura")
+                    b.Property<DateTime>("Fecha")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Kilometraje")
-                        .HasColumnType("integer");
+                    b.Property<double>("Kilometraje")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("NivelAceite")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("NivelGasolina")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("LogsSensores");
+                    b.ToTable("LecturasSensores");
+                });
+
+            modelBuilder.Entity("SistemaLogs.Modelos.LogAuditoria", b =>
+                {
+                    b.Property<int>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Codigo"));
+
+                    b.Property<string>("Accion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Detalles")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Entidad")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("EntidadCodigo")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Codigo");
+
+                    b.ToTable("LogsAuditorias");
                 });
 #pragma warning restore 612, 618
         }

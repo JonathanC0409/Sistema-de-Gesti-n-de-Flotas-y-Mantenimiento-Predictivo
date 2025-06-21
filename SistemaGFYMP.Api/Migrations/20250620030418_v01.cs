@@ -68,6 +68,9 @@ namespace SistemaGFYMP.Api.Migrations
                     Placa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Kilometraje = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NivelGasolina = table.Column<double>(type: "float", nullable: false),
+                    NivelAceite = table.Column<double>(type: "float", nullable: false),
+                    EstadoMotor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ConductorCodigo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

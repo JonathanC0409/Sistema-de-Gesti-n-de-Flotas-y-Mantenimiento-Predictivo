@@ -14,15 +14,25 @@ namespace SistemaLogs.Api.Controllers
     public class LogsAuditoriasController : ControllerBase
     {
         private readonly App2DbContext _context;
+        private readonly App1DbContext _contextSql; 
 
-        public LogsAuditoriasController(App2DbContext context)
+        public LogsAuditoriasController(App2DbContext context, App1DbContext contextSql)
         {
             _context = context;
+            _contextSql = contextSql;
         }
+
+        [HttpGet("logs")]
+        public async Task<ActionResult<IEnumerable<LogAuditoria>>> GetLogs()
+        {
+            var logs = await _context.LogsAuditorias.ToListAsync();
+            return Ok(logs);
+        }
+
 
         // GET: api/LogsAuditorias
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LogAuditoria>>> GetLogAuditoria()
+        public async Task<ActionResult<IEnumerable<LogAuditoria>>> GetLogsAuditorias()
         {
             return await _context.LogsAuditorias.ToListAsync();
         }

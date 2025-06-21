@@ -2,7 +2,62 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Contenedor con fondo degradado mejorado -->
+<div class="container-fluid" style="background: linear-gradient(to right, #0062cc, #66ccff); padding-top: 80px; padding-bottom: 80px;">
+    <div class="text-center">
+        <!-- Título con mayor visibilidad y espacio -->
+        <h1 class="display-3 fw-bold text-white mb-4">Bienvenido al Sistema de Gestión de Flotas</h1>
+
+        <!-- Descripción más clara -->
+        <p class="lead text-white mb-5">Gestione camiones, mantenimientos y alertas con facilidad usando ASP.NET Core.</p>
+
+        <!-- Botón de llamada a la acción -->
+        <a href="https://learn.microsoft.com/aspnet/core" class="btn btn-light btn-lg mb-3">Comienza a aprender</a>
+
+        <!-- Condicional para mostrar Iniciar sesión o Cerrar sesión -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.Action("Logout", "Login")" class="btn btn-dark btn-lg">Cerrar sesión</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Login")" class="btn btn-dark btn-lg">Iniciar sesión</a>
+        }
+    </div>
+</div>
+
+<!-- Sección de características con 3 columnas de Bootstrap -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <!-- Imagen con tamaño fijo -->
+                <img src="https://media.elpaso2000.com/landings/camion/servicios/gestion-flotas-camion-elpaso2000.jpg" class="card-img-top" alt="Gestión de Camiones" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Gestión de Camiones</h5>
+                    <p class="card-text">Administra todos los camiones, con detalles como kilometraje, mantenimiento y más.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <!-- Imagen con tamaño fijo -->
+                <img src="https://static.vecteezy.com/system/resources/previews/020/997/726/original/maintenance-icon-design-free-vector.jpg" class="card-img-top" alt="Mantenimientos Programados" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Mantenimientos Programados</h5>
+                    <p class="card-text">Recibe alertas para los mantenimientos programados de tus camiones.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <!-- Imagen con tamaño fijo -->
+                <img src="https://img.freepik.com/vector-premium/proceso-operativo-roto-rojo-o-icono-falla-concepto-reparacion-o-mantenimiento-simbolo-tendencia-dibujos-animados-plana-falla-moderna-o-interrupcion-logotipo-grafico-diseno-simple-elemento-web-aislado-blanco_775815-943.jpg?w=2000" class="card-img-top" alt="Alertas de Fallos" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Alertas de Fallos</h5>
+                    <p class="card-text">Genera alertas cuando los camiones tienen riesgos de fallos o necesitan mantenimiento.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

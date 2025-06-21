@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sistema.API.Consume;
 using SistemaGFYMP.Modelos;
@@ -8,6 +9,7 @@ namespace Sistema.Presentacion_MVC_.Controllers
     public class TalleresController : Controller
     {
         // GET: TalleresController
+        [Authorize]
         public ActionResult Index()
         {
             var talleres = CRUD<Taller>.GetAll();
@@ -18,6 +20,7 @@ namespace Sistema.Presentacion_MVC_.Controllers
         public ActionResult Details(int id)
         {
             var datos = CRUD<Taller>.GetById(id);
+            datos.MantenimientosProgramados = CRUD<MantenimientoProgramado>.GetBy("taller", id);
             return View(datos);
         }
 

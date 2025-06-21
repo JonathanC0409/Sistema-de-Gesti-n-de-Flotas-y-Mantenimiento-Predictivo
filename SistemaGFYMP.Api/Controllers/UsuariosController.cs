@@ -55,6 +55,12 @@ namespace SistemaGFYMP.Api.Controllers
 
             try
             {
+                // Verificar si el correo ya existe para otro usuario
+                if (_context.Usuarios.Any(u => u.Email == usuario.Email && u.Codigo != id))
+                {
+                    return BadRequest("El correo ya existe para otro usuario.");
+                }
+           
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -77,6 +83,7 @@ namespace SistemaGFYMP.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
+           
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 

@@ -20,18 +20,49 @@ namespace SistemaGFYMP.Api.Controllers
             _context = context;
         }
 
+        [HttpGet("taller/{id}")]
+        public async Task<ActionResult<IEnumerable<MantenimientoProgramado>>> GetTalleres(int id)
+        {
+            var datos = await _context.MantenimientosProgramados
+                .Where(m => m.TallerCodigo == id)
+                .Include(t => t.Camion)
+                .ToListAsync();
+
+            return datos;
+        }
+
+        [HttpGet("camion/{id}")]
+        public async Task<ActionResult<IEnumerable<MantenimientoProgramado>>> GetCamiones(int id)
+        {
+            var datos = await _context.MantenimientosProgramados
+                .Where(mp => mp.CamionCodigo == id)
+                .Include(mp => mp.Taller)
+                .ToListAsync();
+
+            return datos;
+        }
+
         // GET: api/MantenimientosProgramados
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MantenimientoProgramado>>> GetMantenimientoProgramado()
         {
-            return await _context.MantenimientosProgramados.ToListAsync();
+            var datos = await _context.MantenimientosProgramados.
+                Include(m => m.Taller)
+                .Include(m => m.Camion)
+                .ToListAsync();
+
+            return datos;
         }
 
         // GET: api/MantenimientosProgramados/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MantenimientoProgramado>> GetMantenimientoProgramado(int id)
         {
-            var mantenimientoProgramado = await _context.MantenimientosProgramados.FindAsync(id);
+            var mantenimientoProgramado = await _context.MantenimientosProgramados
+                .Where(m => m.Codigo == id)
+                .Include(m => m.Camion)
+                .Include(m => m.Taller)
+                .FirstAsync();
 
             if (mantenimientoProgramado == null)
             {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SistemaGFYMP.Api.Migrations
 {
     [DbContext(typeof(App1DbContext))]
-    [Migration("20250618024558_v01")]
+    [Migration("20250620030418_v01")]
     partial class v01
     {
         /// <inheritdoc />
@@ -42,6 +42,10 @@ namespace SistemaGFYMP.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EstadoMotor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Kilometraje")
                         .HasColumnType("int");
 
@@ -52,6 +56,12 @@ namespace SistemaGFYMP.Api.Migrations
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("NivelAceite")
+                        .HasColumnType("float");
+
+                    b.Property<double>("NivelGasolina")
+                        .HasColumnType("float");
 
                     b.Property<string>("Placa")
                         .IsRequired()

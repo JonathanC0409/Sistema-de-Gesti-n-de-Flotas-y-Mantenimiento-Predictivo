@@ -1,0 +1,40 @@
+﻿@model List<SistemaGFYMP.Modelos.Camion>
+
+@{
+    ViewData["Title"] = "Camiones con Riesgo de Fallo en los Próximos 30 Días";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">@ViewData["Title"]</h1>
+    <h4 class="text-center text-secondary">Lista de camiones que podrían fallar en los próximos 30 días</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Riesgo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var camion in Model)
+                {
+                    <tr>
+                        <td>@camion.Codigo</td>
+                        <td>@camion.Marca</td>
+                        <td>@camion.Modelo</td>
+                        <td class="text-danger">Riesgo de fallo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("GenerarReportePDF", "Reportes")" class="btn btn-danger">Generar Reporte en PDF</a>
+        <a href="@Url.Action("GenerarReporteExcel", "Reportes")" class="btn btn-success">Generar Reporte en Excel</a>
+    </div>
+</div>

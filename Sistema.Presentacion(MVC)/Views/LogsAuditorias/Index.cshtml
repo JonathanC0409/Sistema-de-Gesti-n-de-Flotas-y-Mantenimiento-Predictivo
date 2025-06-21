@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Logs del Sistema";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">@ViewData["Title"]</h1>
+    <h4 class="text-center text-secondary">Lista de todos los logs generados por el sistema</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Acción</th>
+                    <th>Entidad</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model)
+                {
+                    <tr>
+                        <td>@log.Codigo</td>
+                        <td>@log.Accion</td>
+                        <td>@log.Entidad</td>
+                        <td>@log.Usuario</td>
+                        <td>@log.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@log.Detalles</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

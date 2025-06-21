@@ -1,65 +1,99 @@
 ﻿@model SistemaGFYMP.Modelos.Camion
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Camión";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Crear Camión</h1>
+    <h4 class="text-center text-secondary">Formulario para agregar un nuevo camión a la flota</h4>
+    <hr />
 
-<h4>Camion</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Marca" class="control-label"></label>
-                <input asp-for="Marca" class="form-control" />
-                <span asp-validation-for="Marca" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Modelo" class="control-label"></label>
-                <input asp-for="Modelo" class="form-control" />
-                <span asp-validation-for="Modelo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Año" class="control-label"></label>
-                <input asp-for="Año" class="form-control" />
-                <span asp-validation-for="Año" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Placa" class="control-label"></label>
-                <input asp-for="Placa" class="form-control" />
-                <span asp-validation-for="Placa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Kilometraje" class="control-label"></label>
-                <input asp-for="Kilometraje" class="form-control" />
-                <span asp-validation-for="Kilometraje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConductorCodigo" class="control-label"></label>
-                <select asp-for="ConductorCodigo" class="form-control" asp-items="ViewBag.Conductores">
-                    <option value="">-- Seleccione Condutor --</option>
-                </select>
-                <span asp-validation-for="ConductorCodigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form asp-action="Create" class="bg-light p-4 rounded shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Marca" class="form-label">Marca</label>
+                    <input asp-for="Marca" class="form-control" placeholder="Ingrese la marca del camión" />
+                    <span asp-validation-for="Marca" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Modelo" class="form-label">Modelo</label>
+                    <input asp-for="Modelo" class="form-control" placeholder="Ingrese el modelo del camión" />
+                    <span asp-validation-for="Modelo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Año" class="form-label">Año</label>
+                    <input asp-for="Año" class="form-control" placeholder="Ingrese el año de fabricación" />
+                    <span asp-validation-for="Año" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Placa" class="form-label">Placa</label>
+                    <input asp-for="Placa" class="form-control" placeholder="Ingrese la placa del camión" />
+                    <span asp-validation-for="Placa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Kilometraje" class="form-label">Kilometraje</label>
+                    <input asp-for="Kilometraje" class="form-control" placeholder="Ingrese el kilometraje" />
+                    <span asp-validation-for="Kilometraje" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Estado" class="form-label">Estado</label>
+                    <select asp-for="Estado" class="form-control" asp-items="ViewBag.Estados">
+                        <option value="">--Seleccionar estado--</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NivelGasolina" class="form-label">Nivel de Gasolina</label>
+                    <input asp-for="NivelGasolina" class="form-control" placeholder="Ingrese el nivel de gasolina" />
+                    <span asp-validation-for="NivelGasolina" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NivelAceite" class="form-label">Nivel de Aceite</label>
+                    <input asp-for="NivelAceite" class="form-control" placeholder="Ingrese el nivel de aceite" />
+                    <span asp-validation-for="NivelAceite" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="EstadoMotor" class="form-label">Estado del Motor</label>
+                    <select asp-for="EstadoMotor" class="form-control" asp-items="ViewBag.EstadosMotor">
+                        <option value="">--Seleccionar estado del motor--</option>
+                    </select>
+                    <span asp-validation-for="EstadoMotor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ConductorCodigo" class="form-label">Conductor</label>
+                    <select asp-for="ConductorCodigo" class="form-control" asp-items="ViewBag.Conductores">
+                        <option value="">--Seleccionar conductor--</option>
+                    </select>
+                    <span asp-validation-for="ConductorCodigo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mb-3">
+                    <input type="submit" value="Crear Camión" class="btn btn-success w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

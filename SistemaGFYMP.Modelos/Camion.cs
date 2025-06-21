@@ -16,7 +16,10 @@ namespace SistemaGFYMP.Modelos
         public int Año { get; set; }
         public string Placa { get; set; }
         public int Kilometraje { get; set; }
-        public string Estado { get; set; } 
+        public string Estado { get; set; }
+        public double NivelGasolina { get; set; }  // Nivel de gasolina (por ejemplo, 5%)
+        public double NivelAceite { get; set; }    // Nivel de aceite (por ejemplo, 12%)
+        public string EstadoMotor { get; set; } // Estado del motor (por ejemplo, "En marcha", "Detenido")
 
         //Claves foráneas
         public int ConductorCodigo { get; set; } // Código del conductor asignado al camión

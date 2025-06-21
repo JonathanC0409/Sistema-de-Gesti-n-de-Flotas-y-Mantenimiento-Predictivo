@@ -1,42 +1,69 @@
 ﻿@model SistemaGFYMP.Modelos.Conductor
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Conductor";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Conductor</h4>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Detalles del Conductor</h1>
+    <h4 class="text-center text-secondary">Información completa del conductor seleccionado</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Codigo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Licencia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Licencia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaVencimientoLicencia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaVencimientoLicencia)
-        </dd>
-    </dl>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-center text-primary">Información del Conductor</h4>
+            <dl class="row">
+                <dt class="col-sm-4">Código</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Codigo)</dd>
+
+                <dt class="col-sm-4">Nombre</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4">Licencia</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Licencia)</dd>
+
+                <dt class="col-sm-4">Fecha de Vencimiento</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FechaVencimientoLicencia)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="table-responsive">
+        <h4 class="text-center text-primary">Camiones Asignados</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Camión</th>
+                    <th>Estado</th>
+                    <th>Kilometraje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var camion in Model.Camiones)
+                {
+                    <tr>
+                        <td>@camion.Placa</td>
+                        <td>@camion.Estado</td>
+                        <td>@camion.Kilometraje</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Codigo }, new { @class = "btn btn-warning" })
+            |
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Codigo }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

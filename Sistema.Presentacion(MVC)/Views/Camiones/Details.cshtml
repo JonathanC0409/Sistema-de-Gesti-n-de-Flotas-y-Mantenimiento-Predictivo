@@ -1,60 +1,81 @@
 ﻿@model SistemaGFYMP.Modelos.Camion
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Camión";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Camion</h4>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Detalles del Camión</h1>
+    <h4 class="text-center text-secondary">Información completa del camión seleccionado</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Marca)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Marca)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Modelo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Modelo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Año)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Año)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Placa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Placa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kilometraje)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kilometraje)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConductorCodigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConductorCodigo)
-        </dd>
-    </dl>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-center text-primary">Información General</h4>
+            <dl class="row">
+                <dt class="col-sm-4">Código</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Codigo)</dd>
+
+                <dt class="col-sm-4">Marca</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Marca)</dd>
+
+                <dt class="col-sm-4">Modelo</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Modelo)</dd>
+
+                <dt class="col-sm-4">Año</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Año)</dd>
+
+                <dt class="col-sm-4">Placa</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Placa)</dd>
+
+                <dt class="col-sm-4">Kilometraje</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Kilometraje)</dd>
+
+                <dt class="col-sm-4">Estado</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
+
+                <dt class="col-sm-4">Conductor</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Conductor.Nombre)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="table-responsive">
+        <h4 class="text-center text-primary">Mantenimientos Programados</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Fecha de Mantenimiento</th>
+                    <th>Tipo de Mantenimiento</th>
+                    <th>Taller</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mantenimiento in Model.MantenimientosProgramados)
+                {
+                    <tr>
+                        <td>@mantenimiento.Fecha.ToShortDateString()</td>
+                        <td>@mantenimiento.TipoMantenimiento</td>
+                        <td>@mantenimiento.Taller.Nombre</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Codigo }, new { @class = "btn btn-warning" })
+            |
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Codigo}) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

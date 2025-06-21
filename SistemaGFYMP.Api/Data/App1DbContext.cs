@@ -12,8 +12,6 @@ public class App1DbContext : DbContext
     {
     }
 
-    public DbSet<SistemaGFYMP.Modelos.Camion> Camiones { get; set; } = default!;
-
     public DbSet<SistemaGFYMP.Modelos.Conductor> Conductores { get; set; } = default!;
 
     public DbSet<SistemaGFYMP.Modelos.MantenimientoProgramado> MantenimientosProgramados { get; set; } = default!;
@@ -21,5 +19,7 @@ public class App1DbContext : DbContext
     public DbSet<SistemaGFYMP.Modelos.Taller> Talleres { get; set; } = default!;
 
 public DbSet<SistemaGFYMP.Modelos.Usuario> Usuarios { get; set; } = default!;
+
+public DbSet<SistemaGFYMP.Modelos.Camion> Camiones { get; set; } = default!;
 
 }

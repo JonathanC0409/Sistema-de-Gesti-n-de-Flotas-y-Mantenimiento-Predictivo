@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Lecturas de Sensores";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">@ViewData["Title"]</h1>
+    <h4 class="text-center text-secondary">Lista de todas las lecturas de sensores registradas</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Camion Lectura</th>
+                    <th>Kilometraje</th>
+                    <th>Estado del Motor</th>
+                    <th>Fecha</th>
+                    <th>Nivel Gasolina</th>
+                    <th>Nivel Aceite</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lectura in Model)
+                {
+                    <tr>
+                        <td>@lectura.Codigo</td>
+                        <td>@lectura.Comentarios</td>
+                        <td>@lectura.Kilometraje</td>
+                        <td>@lectura.EstadoMotor</td>
+                        <td>@lectura.Fecha.ToString("dd/MM/yyyy")</td>
+                        <td>@lectura.NivelGasolina</td>
+                        <td>@lectura.NivelAceite</td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

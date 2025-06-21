@@ -4,60 +4,85 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sistema.Presentacion_MVC_</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Estilos adicionales -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Sistema.Presentacion_MVC_.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sistema.Presentacion_MVC_</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <!-- Botón para móviles -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <!-- Menú de navegación -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Alineación de los botones a la derecha -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="Camiones" asp-action="Index">Camiones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Camiones" asp-action="Index">Camiones</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="Conductores" asp-action="Index">Conductores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Conductores" asp-action="Index">Conductores</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="MantenimientosProgramados" asp-action="Index">Mantenimientos Programados</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MantenimientosProgramados" asp-action="Index">Mantenimientos Programados</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="Talleres" asp-action="Index">Talleres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Talleres" asp-action="Index">Talleres</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="LecturasSensores" asp-action="Index">Lectura de Sensores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LogsSensores" asp-action="Index">Log Sensores</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="AlertasMantenimientos" asp-action="Index">Alertas Generadas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AlertasPredictivas" asp-action="Index">Alertas</a>
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="LogsAuditorias" asp-action="Index">Logs del Sistema</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="Reportes" asp-action="ReporteRiesgoFallo">Reportes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark px-3" asp-area="" asp-controller="AlertasMantenimientos" asp-action="MantenimietosPendientes">Mantenimientos Pendientes</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+
+    <div class="container mt-4">
+        <main role="main">
+            @RenderBody() <!-- Aquí se renderiza el contenido de las vistas -->
         </main>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Sistema.Presentacion_MVC_ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p class="text-muted">&copy; 2025 - Sistema.Presentacion_MVC_</p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <a href="#" class="text-dark">Privacy</a>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

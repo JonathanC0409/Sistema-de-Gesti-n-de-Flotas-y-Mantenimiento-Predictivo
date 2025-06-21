@@ -25,6 +25,24 @@ namespace Sistema.API.Consume
 
         }
 
+        public static List<T> GetAll(string campo)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{EndPoint}/{campo}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = response.Content.ReadAsStringAsync().Result;
+                    return JsonConvert.DeserializeObject<List<T>>(json);
+                }
+                else
+                {
+                    throw new Exception($"Error:{response.StatusCode}");
+                }
+            }
+
+        }
+
         public static T GetById(int id)
         {
             using (var client = new HttpClient())

@@ -12,9 +12,9 @@ public class App2DbContext : DbContext
     {
     }
 
-    public DbSet<SistemaLogs.Modelos.LogSensor> LogsSensores { get; set; } = default!;
-
-    public DbSet<SistemaLogs.Modelos.AlertaPredictiva> AlertasPredictivas { get; set; } = default!;
-
     public DbSet<SistemaLogs.Modelos.LogAuditoria> LogsAuditorias { get; set; } = default!;
+
+public DbSet<SistemaLogs.Modelos.AlertaMantenimiento> AlertasMantenimientos { get; set; } = default!;
+
+public DbSet<SistemaLogs.Modelos.LecturaSensor> LecturasSensores { get; set; } = default!;
 }

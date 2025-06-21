@@ -1,48 +1,73 @@
 ﻿@model SistemaGFYMP.Modelos.MantenimientoProgramado
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Mantenimiento Programado";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>MantenimientoProgramado</h4>
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Detalles del Mantenimiento Programado</h1>
+    <h4 class="text-center text-secondary">Información completa del mantenimiento programado seleccionado</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Codigo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoMantenimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoMantenimiento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TallerCodigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TallerCodigo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CamionCodigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CamionCodigo)
-        </dd>
-    </dl>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-center text-primary">Detalles del Mantenimiento</h4>
+            <dl class="row">
+                <dt class="col-sm-4">Código</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Codigo)</dd>
+
+                <dt class="col-sm-4">Fecha</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Fecha)</dd>
+
+                <dt class="col-sm-4">Tipo de Mantenimiento</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TipoMantenimiento)</dd>
+
+                <dt class="col-sm-4">Taller</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Taller.Nombre)</dd>
+
+                <dt class="col-sm-4">Camión</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Camion.Marca)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="table-responsive">
+        <h4 class="text-center text-primary">Detalles del Camión</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Kilometraje</th>
+                    <th>Ciudad del Taller</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Camion.Placa)</td>
+                    <td>@Html.DisplayFor(model => model.Camion.Modelo)</td>
+                    <td>@Html.DisplayFor(model => model.Camion.Año)</td>
+                    <td>@Html.DisplayFor(model => model.Camion.Kilometraje)</td>
+                    <td>@Html.DisplayFor(model => model.Taller.Ciudad)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Codigo }, new { @class = "btn btn-warning" })
+            |
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Codigo}) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

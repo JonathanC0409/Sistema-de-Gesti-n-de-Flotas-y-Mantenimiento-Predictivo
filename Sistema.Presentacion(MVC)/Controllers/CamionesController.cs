@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Sistema.API.Consume;
@@ -8,7 +9,9 @@ namespace Sistema.Presentacion_MVC_.Controllers
 {
     public class CamionesController : Controller
     {
+
         // GET: CamionesController
+        [Authorize]
         public ActionResult Index()
         {
             var camiones = CRUD<Camion>.GetAll();
@@ -20,7 +23,30 @@ namespace Sistema.Presentacion_MVC_.Controllers
         {
             ViewBag.Conductores = GetConductores();
             var datos = CRUD<Camion>.GetById(id);
+            datos.MantenimientosProgramados = CRUD<MantenimientoProgramado>.GetBy("camion", id);
             return View(datos);
+        }
+
+        private List<SelectListItem> Estados()
+        {
+            List<SelectListItem> estados = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Mantenimiento", Value = "Mantenimiento" },
+        new SelectListItem { Text = "Operativo", Value = "Operativo" }
+    };
+
+            return estados;
+        }
+
+        private List<SelectListItem> EstadoMotor()
+        {
+            List<SelectListItem> estados = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Alerta", Value = "Alerta" },
+        new SelectListItem { Text = "Normal", Value = "Normal" }
+    };
+
+            return estados;
         }
 
         private List<SelectListItem> GetConductores()
@@ -40,6 +66,8 @@ namespace Sistema.Presentacion_MVC_.Controllers
         // GET: CamionesController/Create
         public ActionResult Create()
         {
+            ViewBag.Estados = Estados();
+            ViewBag.EstadosMotor = EstadoMotor();
             ViewBag.Conductores = GetConductores();
             return View();
         }
@@ -63,6 +91,9 @@ namespace Sistema.Presentacion_MVC_.Controllers
         // GET: CamionesController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Estados = Estados();
+            ViewBag.EstadosMotor = EstadoMotor();
+            ViewBag.Conductores = GetConductores();
             var datos = CRUD<Camion>.GetById(id);
             return View(datos);
         }
